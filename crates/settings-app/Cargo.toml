@@ -11,7 +11,14 @@ authors.workspace = true
 name = "win10-settings"
 path = "src/main.rs"
 
+[features]
+default = ["light"]
+light = ["iced/tiny-skia"]
+gpu = ["iced/wgpu"]
+
 [dependencies]
+iced = { version = "0.14", default-features = false, features = ["advanced", "thread-pool", "crisp", "svg"] }
+open = "5"
 settings-core = { path = "../settings-core" }
 settings-platform = { path = "../settings-platform" }
 

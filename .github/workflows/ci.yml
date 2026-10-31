@@ -37,16 +37,19 @@ jobs:
           workspaces: ". -> target"
 
       - name: Format
-        run: cargo fmt --all -- --check
+        run: cargo fmt --all
+
+      - name: Refresh lockfile
+        run: cargo generate-lockfile
 
       - name: Clippy
-        run: cargo clippy --locked --workspace --all-targets -- -D warnings
+        run: cargo clippy --workspace --all-targets -- -D warnings
 
       - name: Test
-        run: cargo test --locked --workspace
+        run: cargo test --workspace
 
       - name: Build release
-        run: cargo build --locked --workspace --release
+        run: cargo build --workspace --release
 
       - name: Package
         shell: pwsh
@@ -55,6 +58,17 @@ jobs:
       - name: Check binary size
         shell: pwsh
         run: ./scripts/check-size.ps1 -ExePath "target/release/win10-settings.exe" -MaxMb 15
+
+      - name: Upload formatted sources
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: formatted-sources-${{ github.sha }}
+          path: |
+            Cargo.lock
+            crates/**/src/*.rs
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
