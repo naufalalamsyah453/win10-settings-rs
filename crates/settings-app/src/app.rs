@@ -2,7 +2,7 @@ use crate::theme::{self, Colors};
 use crate::widgets;
 use iced::alignment::Vertical;
 use iced::widget::{
-    button, column, container, mouse_area, row, scrollable, space, text, text_input, Column, Row,
+    Column, Row, button, column, container, mouse_area, row, scrollable, space, text, text_input,
 };
 use iced::{Color, Element, Fill, FillPortion, Font, Task, Theme, window};
 use settings_core::{Page, search};
@@ -178,20 +178,12 @@ impl App {
         .align_y(Vertical::Center)
         .style(theme::search_bar(colors));
 
-        let theme_icon = if self.dark {
-            "light_mode"
-        } else {
-            "dark_mode"
-        };
+        let theme_icon = if self.dark { "light_mode" } else { "dark_mode" };
 
-        let theme_button = button(widgets::icon(
-            theme_icon,
-            20.0,
-            colors.on_surface_variant,
-        ))
-        .on_press(Message::ToggleTheme)
-        .padding(8)
-        .style(theme::icon_button(colors));
+        let theme_button = button(widgets::icon(theme_icon, 20.0, colors.on_surface_variant))
+            .on_press(Message::ToggleTheme)
+            .padding(8)
+            .style(theme::icon_button(colors));
 
         let controls = row![
             window_button(
@@ -216,11 +208,17 @@ impl App {
         .spacing(2);
 
         container(
-            row![title, space::horizontal(), search_bar, theme_button, controls]
-                .spacing(12)
-                .padding([0, 12])
-                .height(64)
-                .align_y(Vertical::Center),
+            row![
+                title,
+                space::horizontal(),
+                search_bar,
+                theme_button,
+                controls
+            ]
+            .spacing(12)
+            .padding([0, 12])
+            .height(64)
+            .align_y(Vertical::Center),
         )
         .width(Fill)
         .style(theme::top_bar(colors))
@@ -254,13 +252,11 @@ impl App {
             })
             .collect();
 
-        container(
-            scrollable(Column::with_children(items).spacing(4).padding(12)).height(Fill),
-        )
-        .width(320)
-        .height(Fill)
-        .style(theme::sidebar(self.colors))
-        .into()
+        container(scrollable(Column::with_children(items).spacing(4).padding(12)).height(Fill))
+            .width(320)
+            .height(Fill)
+            .style(theme::sidebar(self.colors))
+            .into()
     }
 
     fn content(&self) -> AppElement<'_> {
@@ -294,10 +290,8 @@ impl App {
         let mut rows: Vec<AppElement<'_>> = Vec::new();
 
         for chunk in Page::ALL[1..].chunks(2) {
-            let mut tiles: Vec<AppElement<'static>> = chunk
-                .iter()
-                .map(|&page| quick_tile(page, colors))
-                .collect();
+            let mut tiles: Vec<AppElement<'static>> =
+                chunk.iter().map(|&page| quick_tile(page, colors)).collect();
 
             if tiles.len() == 1 {
                 tiles.push(space::horizontal().into());
@@ -354,11 +348,7 @@ impl App {
         .spacing(12);
 
         if !self.status.is_empty() {
-            content = content.push(
-                text(&self.status)
-                    .size(13)
-                    .color(colors.on_surface_variant),
-            );
+            content = content.push(text(&self.status).size(13).color(colors.on_surface_variant));
         }
 
         content.into()
@@ -391,11 +381,7 @@ impl App {
                     .into(),
             );
         } else {
-            children.extend(
-                results
-                    .into_iter()
-                    .map(|page| result_row(page, colors)),
-            );
+            children.extend(results.into_iter().map(|page| result_row(page, colors)));
         }
 
         Column::with_children(children).spacing(10).into()

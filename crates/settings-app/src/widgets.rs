@@ -1,7 +1,7 @@
 use crate::app::Message;
 use crate::theme;
-use iced::widget::{Element, svg};
-use iced::Color;
+use iced::widget::svg;
+use iced::{Color, Element};
 
 pub fn icon(name: &str, size: f32, color: Color) -> Element<'static, Message> {
     let bytes: &'static [u8] = match name {
@@ -11,9 +11,7 @@ pub fn icon(name: &str, size: f32, color: Color) -> Element<'static, Message> {
         "apps" => include_bytes!("../../../assets/icons/apps.svg").as_slice(),
         "person" => include_bytes!("../../../assets/icons/person.svg").as_slice(),
         "schedule" => include_bytes!("../../../assets/icons/schedule.svg").as_slice(),
-        "sports_esports" => {
-            include_bytes!("../../../assets/icons/sports_esports.svg").as_slice()
-        }
+        "sports_esports" => include_bytes!("../../../assets/icons/sports_esports.svg").as_slice(),
         "accessibility_new" => {
             include_bytes!("../../../assets/icons/accessibility_new.svg").as_slice()
         }
