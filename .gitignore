@@ -1,0 +1,11 @@
+/target
+/artifacts
+*.pdb
+*.exe
+*.msi
+*.nsi
+.vs/
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
