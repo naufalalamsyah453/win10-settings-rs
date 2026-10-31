@@ -1,5 +1,9 @@
 pub fn platform_name() -> &'static str {
-    if cfg!(windows) { "windows" } else { "unsupported" }
+    if cfg!(windows) {
+        "windows"
+    } else {
+        "unsupported"
+    }
 }
 
 #[cfg(test)]

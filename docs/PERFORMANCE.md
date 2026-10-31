@@ -21,13 +21,26 @@ Baseline is measured with `scripts/measure.ps1 -Mode Native`. The native
 comparison records `SystemSettings.exe` and its process tree separately from
 `ApplicationFrameHost` and `RuntimeBroker`.
 
+Measured 2026-10-31 on Windows 10 Home 22H2 (build 19045), AMD Ryzen 5
+6600H, 15.2 GB RAM, 12 logical cores. Median of 3 runs, idle for 10 seconds.
+
 | Item | Value |
 | --- | --- |
-| Status | Pending first measurement |
-| Native `SystemSettings.exe` idle private | TBD |
-| Native process tree idle private | TBD |
-| Native startup to first frame | TBD |
-| Native idle CPU | TBD |
+| Status | Baseline captured |
+| Native `SystemSettings.exe` idle private | 48.54 MB |
+| Native `SystemSettings.exe` idle working set | 95.46 MB |
+| Native process tree idle private | 48.54 MB |
+| Native process count | 1 |
+| Native startup to first frame | 408 ms |
+| Native idle CPU | 0.00% |
+
+The measured process tree contains only `SystemSettings.exe`. Shared UWP host
+processes (`ApplicationFrameHost.exe`, `RuntimeBroker.exe`) were present on the
+system for other apps and are not attributed to Settings.
+
+Derived gates from this baseline: private working set <= 34.0 MB (70% of
+native) and startup <= 204 ms (50% of native). The absolute targets remain
+45 MB and 300 ms; the stricter of the two applies.
 
 ## Measurement method
 
