@@ -12,7 +12,6 @@ pub struct Colors {
     pub on_primary: Color,
     pub primary_container: Color,
     pub on_primary_container: Color,
-    pub outline: Color,
     pub outline_variant: Color,
     pub danger: Color,
 }
@@ -28,7 +27,6 @@ impl Colors {
         on_primary: Color::from_rgb8(0xFF, 0xFF, 0xFF),
         primary_container: Color::from_rgb8(0xD1, 0xE4, 0xFF),
         on_primary_container: Color::from_rgb8(0x00, 0x1D, 0x36),
-        outline: Color::from_rgb8(0x72, 0x77, 0x7F),
         outline_variant: Color::from_rgb8(0xC2, 0xC7, 0xCF),
         danger: Color::from_rgb8(0xBA, 0x1A, 0x1A),
     };
@@ -43,7 +41,6 @@ impl Colors {
         on_primary: Color::from_rgb8(0x00, 0x32, 0x58),
         primary_container: Color::from_rgb8(0x00, 0x49, 0x7D),
         on_primary_container: Color::from_rgb8(0xD1, 0xE4, 0xFF),
-        outline: Color::from_rgb8(0x8C, 0x91, 0x99),
         outline_variant: Color::from_rgb8(0x42, 0x47, 0x4E),
         danger: Color::from_rgb8(0xFF, 0xB4, 0xAB),
     };
